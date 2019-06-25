@@ -57,14 +57,16 @@ switch (command) {
             .then(function (data) {
                 // console.log(data);
                 // console.log(data.tracks.items)
-                console.log(data.tracks.items[0].album.artists.name)
                 // * Artist(s)
+                console.log(data.tracks.items[0].album.artists[0].name)
 
 
                 // * The song's name
                 console.log(data.tracks.items[0].name)
 
                 // * A preview link of the song from Spotify
+                console.log(data.tracks.items[0].album.external_urls.spotify)
+
 
                 // * The album that the song is from
                 console.log(data.tracks.items[0].album.name)

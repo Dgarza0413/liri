@@ -22,24 +22,19 @@ switch (command) {
         console.log("concert this was selected")
         axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(
             function (response) {
-                // console.log(response.data);
-                // console.log(response.data.venue)
-                // console.log(response.data.venue.name)
-                // console.log(response.data.datetime)
-                // * Name of the venue
+                console.log("=========Bands in Town========")
                 for (var i = 0; i < response.data.length; i++) {
                     console.log("")
-                    console.log("=========Bands in Town========")
-                    console.log("")
-                    console.log("==========Venue Name==========")
+                    console.log("----------Venue Name----------")
                     console.log(response.data[i].datetime)
                     console.log(response.data[i].venue.name);
                     console.log("")
-                    console.log("=========Venue Location=======")
+                    console.log("---------Venue Location-------")
                     console.log("country: " + response.data[i].venue.country)
                     console.log("State: " + response.data[i].venue.region)
                     console.log("city: " + response.data[i].venue.city)
                     console.log("")
+                    console.log("=============================")
                 }
 
                 // * Venue location
@@ -49,27 +44,31 @@ switch (command) {
         )
         break;
     case "spotify-this-song":
-        // var Spotify = require('node-spotify-api');
         spotify
-            // .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-            // .request('https://api.spotify.com/v1/search?q=Muse&type=track%2Cartist&market=US&limit=10&offset=5')
             .request('https://api.spotify.com/v1/search?q=' + process.argv[3] + '&type=track')
             .then(function (data) {
-                // console.log(data);
-                // console.log(data.tracks.items)
-                // * Artist(s)
-                console.log(data.tracks.items[0].album.artists[0].name)
+                for (var i = 0; i < data.tracks.items.length; i++) {
+                    console.log(data.tracks.items[i])
+                    // console.log(data.tracks.items[i].album.name)
+                    // console.log(data.tracks.items[i].album.external_urls.sportify)
 
+                }
+                console.log("=========Artists=========")
+                for (var i = 0; i < data.tracks.items.length; i++) {
+                    console.log("")
+                    console.log("=========album name===========")
 
-                // * The song's name
-                console.log(data.tracks.items[0].name)
+                    // console.log(data.tracks.items[i].album.artists)
+                    for (var j = 0; j < data.tracks.items[i].album.artists.length; j++) {
+                        console.log("artist Name: " + data.tracks.items[i].album.artists[j].name)
+                    }
+                    console.log("Track Name: " + data.tracks.items[i].name)
+                    console.log("Open to album " + data.tracks.items[i].album.external_urls.spotify)
+                    console.log("Preview Song " + data.tracks.items[i].preview_url)
+                    console.log("album Name: " + data.tracks.items[i].album.name)
+                    console.log("")
 
-                // * A preview link of the song from Spotify
-                console.log(data.tracks.items[0].album.external_urls.spotify)
-
-
-                // * The album that the song is from
-                console.log(data.tracks.items[0].album.name)
+                }
             })
             .catch(function (err) {
                 console.error('Error occurred: ' + err);
@@ -80,14 +79,18 @@ switch (command) {
         console.log("movies were selected")
         axios.get("http://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy").then(
             function (response) {
-                console.log("The title is " + response.data.Title)
-                console.log("Year of Movie: " + response.data.Year)
+                console.log("")
+                console.log("==============OMDB===============")
+                console.log("Title: " + response.data.Title)
+                console.log("Year: " + response.data.Year)
                 console.log("imdb rating: " + response.data.imdbRating);
                 console.log("rotten Tomatoes rating: " + response.data.Ratings[1].Value);
-                console.log("Produced in: " + response.data.Country)
-                console.log("language of the movie: " + response.data.Language)
+                console.log("Country Produced: " + response.data.Country)
+                console.log("language: " + response.data.Language)
                 console.log("plot: " + response.data.Plot)
                 console.log("Actors: " + response.data.Actors)
+                console.log("=================================")
+                console.log("")
             })
             .catch(function (error) {
                 if (error.response) {

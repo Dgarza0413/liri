@@ -1,5 +1,5 @@
 console.log("node is successful")
-require("dotenv")
+require("dotenv").config({ path: './.env.env' })
 var keys = require("./keys.js");
 console.log(keys)
 var fs = require("fs");

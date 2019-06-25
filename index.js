@@ -1,20 +1,18 @@
 console.log("node is successful")
-
+require("dotenv").config();
+var keys = require("./keys.js");
 var fs = require("fs");
 var axios = require("axios");
-var spotify = require('node-spotify-api');
+var moment = require("moment");
 var command = process.argv[2];
 var selection = process.argv[3];
-
 var Spotify = require('node-spotify-api');
+var spotify = new Spotify({ keys });
 
-var spotify = new Spotify({
-    id: "388b3ed639db4dd5b087b97ab8411b0b",
-    secret: "f817cab19893451098d14132ba67325b"
-});
-
-
-
+// var spotify = new Spotify({
+//     id: "388b3ed639db4dd5b087b97ab8411b0b",
+//     secret: "f817cab19893451098d14132ba67325b"
+// });
 
 switch (command) {
     case "concert-this":
@@ -22,7 +20,9 @@ switch (command) {
         console.log("concert this was selected")
         axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(
             function (response) {
+                console.log("==============================")
                 console.log("=========Bands in Town========")
+                console.log("==============================")
                 for (var i = 0; i < response.data.length; i++) {
                     console.log("")
                     console.log("----------Venue Name----------")
@@ -35,10 +35,8 @@ switch (command) {
                     console.log("city: " + response.data[i].venue.city)
                     console.log("")
                     console.log("=============================")
+                    console.log("=============================")
                 }
-
-                // * Venue location
-
                 // * Date of the Event (use moment to format this as "MM/DD/YYYY")
             }
         )
@@ -48,17 +46,8 @@ switch (command) {
             .request('https://api.spotify.com/v1/search?q=' + process.argv[3] + '&type=track')
             .then(function (data) {
                 for (var i = 0; i < data.tracks.items.length; i++) {
-                    console.log(data.tracks.items[i])
-                    // console.log(data.tracks.items[i].album.name)
-                    // console.log(data.tracks.items[i].album.external_urls.sportify)
-
-                }
-                console.log("=========Artists=========")
-                for (var i = 0; i < data.tracks.items.length; i++) {
                     console.log("")
-                    console.log("=========album name===========")
-
-                    // console.log(data.tracks.items[i].album.artists)
+                    console.log("=========Spotify===========")
                     for (var j = 0; j < data.tracks.items[i].album.artists.length; j++) {
                         console.log("artist Name: " + data.tracks.items[i].album.artists[j].name)
                     }
@@ -67,7 +56,6 @@ switch (command) {
                     console.log("Preview Song " + data.tracks.items[i].preview_url)
                     console.log("album Name: " + data.tracks.items[i].album.name)
                     console.log("")
-
                 }
             })
             .catch(function (err) {

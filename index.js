@@ -1,69 +1,20 @@
 console.log("node is successful")
 
 var fs = require("fs");
-var title = process.argv[2]
-// concert-this
-// spotify-this-song
-// movie-this
-// do-what-it-says
-
 var axios = require("axios");
-
-// i need to use axios to pull api information from the following
-// ========
-// spotify
-// bands in town
-// omdb
-
-// ombd api
-// http://www.omdbapi.com/?i=tt3896198&apikey=4554814a
-// axios.get("http://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy").then(
-//     function (response) {
-//         console.log("This movie's rating is: " + response.data.imdbRating);
-//         console.log("The title is " + response.data.Title)
-//         console.log(response.data)
-//     })
-//     .catch(function (error) {
-//         if (error.response) {
-//             console.log("----------Data----------");
-//             console.log(error.response.data);
-//             console.log("---------Status---------");
-//             console.log(error.response.status);
-//             console.log("---------Status---------");
-//             console.log(error.response.headers);
-//         } else if (error.request) {
-//             console.log(error.request);
-//         } else {
-//             console.log("Error", error.message);
-//         }
-//         console.log(error.config);
-//     });
-
-// axios.get().then(
-//     function (response) {
-//         console.log("This bands in town API");
-//     }
-// )
-
-// axios.get().then(
-//     function (response) {
-//         console.log("This is spotify API");
-//     }
-// )
-
-// spotify api
-// "https://accounts.spotify.com/api/token"
-// `"https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"`
-// 388b3ed639db4dd5b087b97ab8411b0b
-
-
-// bands in town
-// ??????
-
-// an else-if statement for when call a certain process.argv[2]
-
+var spotify = require('node-spotify-api');
 var command = process.argv[2];
 var selection = process.argv[3];
+
+var Spotify = require('node-spotify-api');
+
+var spotify = new Spotify({
+    id: "388b3ed639db4dd5b087b97ab8411b0b",
+    secret: "f817cab19893451098d14132ba67325b"
+});
+
+
+
 
 switch (command) {
     case "concert-this":
@@ -98,7 +49,29 @@ switch (command) {
         )
         break;
     case "spotify-this-song":
-        console.log("spotify was selected")
+        // var Spotify = require('node-spotify-api');
+        spotify
+            // .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+            // .request('https://api.spotify.com/v1/search?q=Muse&type=track%2Cartist&market=US&limit=10&offset=5')
+            .request('https://api.spotify.com/v1/search?q=' + process.argv[3] + '&type=track')
+            .then(function (data) {
+                // console.log(data);
+                // console.log(data.tracks.items)
+                console.log(data.tracks.items[0].album.artists.name)
+                // * Artist(s)
+
+
+                // * The song's name
+                console.log(data.tracks.items[0].name)
+
+                // * A preview link of the song from Spotify
+
+                // * The album that the song is from
+                console.log(data.tracks.items[0].album.name)
+            })
+            .catch(function (err) {
+                console.error('Error occurred: ' + err);
+            });
         break;
     case "movie-this":
         var title = process.argv[3]
@@ -108,22 +81,11 @@ switch (command) {
                 console.log("The title is " + response.data.Title)
                 console.log("Year of Movie: " + response.data.Year)
                 console.log("imdb rating: " + response.data.imdbRating);
-                console.log("rotten Tomatoes rating: " + response.data.Ratings.Source);
-                console.log("")
-
-                console.log(response.data)
-
-
-
-                // * Title of the movie.
-                // * Year the movie came out.
-                // * IMDB Rating of the movie.
-                // * Rotten Tomatoes Rating of the movie.
-                // * Country where the movie was produced.
-                // * Language of the movie.
-                // * Plot of the movie.
-                // * Actors in the movie.
-
+                console.log("rotten Tomatoes rating: " + response.data.Ratings[1].Value);
+                console.log("Produced in: " + response.data.Country)
+                console.log("language of the movie: " + response.data.Language)
+                console.log("plot: " + response.data.Plot)
+                console.log("Actors: " + response.data.Actors)
             })
             .catch(function (error) {
                 if (error.response) {
@@ -145,11 +107,3 @@ switch (command) {
         console.log("what it says was selected")
         break;
 }
-// if (command === "concert-this") {
-//     console.log("concert this was selected")
-// }
-
-// if (command === "spotify-this-song") {
-//     console.log("spotify was selected")
-// }
-

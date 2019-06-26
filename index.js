@@ -1,26 +1,18 @@
 console.log("node is successful")
-require("dotenv").config({ path: './.env.env' })
+require("dotenv")
+    .config({ path: './.env' })
 var keys = require("./keys.js");
-console.log(keys)
 var fs = require("fs");
 var axios = require("axios");
 var moment = require("moment");
 var command = process.argv[2];
-var selection = process.argv[3];
 var Spotify = require('node-spotify-api');
-var spotify = new Spotify(keys);
+// var spotify = new Spotify(keys);
 
-// var spotify = new Spotify({
-//     id: "388b3ed639db4dd5b087b97ab8411b0b",
-//     secret: "f817cab19893451098d14132ba67325b"
-// });
-
-// var spotify = new Spotify({
-//     id: process.env.SPOTIFY_ID,
-//     secret: process.env.SPOTIFY_SECRET
-// });
-
-
+var spotify = new Spotify({
+    id: process.env.SPOTIFY_ID,
+    secret: process.env.SPOTIFY_SECRET
+});
 
 switch (command) {
     case "concert-this":
@@ -106,5 +98,18 @@ switch (command) {
         break;
     case "do-what-it-says":
         console.log("what it says was selected")
+        fs.readFile("random.txt", "utf8", function (error, data) {
+            if (error) {
+                return console.log(error);
+            }
+            // console.log(data)
+            var output = data.split(",")
+            // for (var i = 0; i < output.length; i++) {
+
+            // }
+            console.log(output[0] + ' ' + output[1])
+            // output
+
+        })
         break;
 }

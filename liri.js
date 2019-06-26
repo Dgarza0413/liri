@@ -51,13 +51,11 @@ function search() {
             )
             break;
         case "spotify-this-song":
-            // spotify()
-            // function spotify() {
             var nodeArgs = process.argv;
             var search = "";
-            for (var i = 3; i < nodeArgs.length; i++) {
-                if (i > 3 && i < nodeArgs.length) {
-                    search = search + " " + nodeArgs[i];
+            for (var i = 2; i < nodeArgs.length; i++) {
+                if (i > 2 && i < nodeArgs.length) {
+                    search = search + nodeArgs[i] + " ";
                 }
             }
             if (search === "") {
@@ -141,7 +139,6 @@ function search() {
                     return console.log(error);
                 }
                 var output = data.split(",")
-                // console.log("node" + liri.js + output[0] + ' ' + output[1])
                 if (output[0] === "spotify-this-song") {
                     spotify
                         .request('https://api.spotify.com/v1/search?q=' + output[1] + '&type=track')

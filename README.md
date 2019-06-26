@@ -16,7 +16,7 @@ This is primarily a node backend application and requires one to being within th
 
 
 5. Contain a link to a deployed version of the app
-
+https://dgarza0413.github.io/liri/
 
 6. Clearly list the technologies used in the app
 Axios is the primary technology being used along with node

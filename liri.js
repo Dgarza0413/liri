@@ -1,7 +1,8 @@
-console.log("node is successful")
+// console.log("node is successful")
 //i ran into trouble collecting from keys.js for the env
 //instead i found a way using a config method to the env path
 require("dotenv").config({ path: './.env' })
+var Table = require('cli-table');
 var fs = require("fs");
 var axios = require("axios");
 var moment = require("moment");
@@ -31,22 +32,25 @@ function search() {
             console.log("concert this was selected")
             axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp").then(
                 function (response) {
-                    console.log("==============================")
-                    console.log("=========Bands in Town========")
-                    console.log("==============================")
+                    var table = new Table({
+                        head: ['date', 'Venue', 'Country', 'region', 'city']
+                        , colWidths: []
+                    });
+                    // console.log("==============================")
+                    // console.log("=========Bands in Town========")
+                    // console.log("==============================")
                     for (var i = 0; i < response.data.length; i++) {
-                        console.log("")
-                        console.log("----------Venue Name----------")
-                        console.log(moment(response.data[i].datetime).format('MM/DD/YYYY'))
-                        console.log(response.data[i].venue.name);
-                        console.log("")
-                        console.log("---------Venue Location-------")
-                        console.log("country: " + response.data[i].venue.country)
-                        console.log("State: " + response.data[i].venue.region)
-                        console.log("city: " + response.data[i].venue.city)
-                        console.log("")
-                        console.log("=============================")
+                        table.push(
+                            [
+                                `${moment(response.data[i].datetime).format('MM/DD/YYYY')}`,
+                                `${response.data[i].venue.name}`,
+                                `${response.data[i].venue.country}`,
+                                `${response.data[i].venue.region}`,
+                                `${response.data[i].venue.city}`
+                            ]
+                        )
                     }
+                    console.log(table.toString())
                 }
             )
             break;

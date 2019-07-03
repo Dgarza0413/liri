@@ -3,9 +3,9 @@ Having no website of its own. This project uses backend tech node to pass in inf
 
 # Synopsis
 liri is a CLI driven project where we utilize node to take in requests with the node `process.argv` and send them using various npm packages such as axios. We will use axios to pull api information from:
-     * bands in town
-     * spotify
-     * ombd
+* bands in town
+* spotify
+* ombd
 
 We will then organize the data using cli-table.
 

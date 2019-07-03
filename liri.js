@@ -36,9 +36,6 @@ function search() {
                         head: ['date', 'Venue', 'Country', 'region', 'city']
                         , colWidths: []
                     });
-                    // console.log("==============================")
-                    // console.log("=========Bands in Town========")
-                    // console.log("==============================")
                     for (var i = 0; i < response.data.length; i++) {
                         table.push(
                             [

@@ -1,13 +1,18 @@
 # liri
+Having no website of its own. This project uses backend tech node to pass in information into the CLI and retrieve api information using axios and displaying onto the terminal
 
-we are using axios for the following api's:
-- bands in town
-- spotify
-- ombd
-to pull information from the backend and display on the terminal.
+# Synopsis
+liri is a CLI driven project where we utilize node to take in requests with the node `process.argv` and send them using various npm packages such as axios. We will use axios to pull api information from:
+     * bands in town
+     * spotify
+     * ombd
 
-This is organized by requiring axios and calling the process.argv to provide certain calls and information
+We will then organize the data using cli-table.
 
+# about liri.js
+1. To start we first install and require all of our packages to the top of the file that includes table, fs, axios, moment, and our dotenv file.
+
+2. Since this program requires the user to interact with the CLI we splice the process.argv to take in our request that does not discriminate towards spaces the user may use.
 
 3. Give start-to-finish instructions on how to run the app
 - This is primarily a node backend application and requires one to being within the folder of the executed file in order to work. By using the following code: node index.js <parameters>. one is able to provide the instructions to recieve information about a song, band, or movie.

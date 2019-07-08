@@ -17,14 +17,15 @@ function search() {
     switch (command) {
         case "concert-this":
             var nodeArgs = process.argv;
-            var search = "";
-            for (var i = 3; i < nodeArgs.length; i++) {
-                if (i > 3 && i < nodeArgs.length) {
-                    search = search + " " + nodeArgs[i];
-                } else {
-                    search += nodeArgs[i]
-                }
-            }
+            // var search = "";
+            var search = process.argv.slice(3).join("");
+            // for (var i = 3; i < nodeArgs.length; i++) {
+            //     if (i > 3 && i < nodeArgs.length) {
+            //         search = search + " " + nodeArgs[i];
+            //     } else {
+            //         search += nodeArgs[i]
+            //     }
+            // }
             if (search === "") {
                 search += "the killers"
             }

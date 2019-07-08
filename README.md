@@ -9,6 +9,18 @@ liri is a CLI driven project where we utilize node to take in requests with the 
 
 We will then organize the data using cli-table.
 
+# review concepts/questions
+We are entering the basis of the main stack using node. Node is a technology that utilizes javascript on both the backend and frontend. We are using backend technologies that run parallel to 'primarily" frontend tech such as $.ajax and axios, inquirer and forms.
+
+1. Why is Node.js a revelation for full-stack web developer?
+    * node uses javascript for both backend and frontend programming that as a result consolidates the language diversity.
+
+2. what is npm?
+    * node package manager utilizes a link between a repository of code and
+
+3. What is the purpose of package.json
+    * package.json is a set of instructions that is handled by npm on what is relevant to the applicaiton and installed.
+
 # about liri.js
 1. To start we first install and require all of our packages to the top of the file that includes table, fs, axios, moment, and our dotenv file.
 
